@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="eng">
+    <head>
+        <link type="text/css" rel="stylesheet" href="styles.css">
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+<script src='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet' />
+
+    <title></title>
+    </head>
+    <header>
+        <nav>
+          <div>
+          <a href="index.html" >  <img class="logo" src="geo.png"/> </a>
+          </div>
+                <ul>
+                  <li><a class="active" href="#home">Home</a></li>
+                  <li><a href="#about">About</a></li>
+                  <li>
+                    <form class="searchBox" action="">
+                    <input type="text" placeholder="What do you like to search.." name="search" >
+                    <button type="submit" onclick="initMap()">Search</button>
+                  </form>
+                  </li>
+                  
+                </ul>
+            </nav>
+    </header>
+    <body>
+        <div id='mapContainer' style='width: auto; height:500px;'></div>
+
+        <p>
+            latitude: <span id="latitude">&deg;</span><br>
+            longtitude: <span id="longitude">&deg;</span>
+           </p>
+<script>
+
+mapboxgl.accessToken = 'pk.eyJ1IjoiYWtpbnllbWkxNDcyIiwiYSI6ImNrMXoyNW92dDBsZ2UzaG12Mm9xNGhmdGcifQ.RlIm2uIf_39XH1hbaG4C7A';
+var map = new mapboxgl.Map({
+container: 'mapContainer',
+center: [9.0820, 8.6753],
+zoom: 5,
+style: 'mapbox://styles/mapbox/streets-v11'
+});
+
+map.addControl(new mapboxgl.GeolocateControl({
+    positionOptions: {
+        enableHighAccuracy: true
+    },
+    trackUserLocation: true
+}));
+
+</script>
+      <footer><p class="footerText">Adewale Muritala Akinyemi Project 
+          <small class="footerText">Geo Search 2019</small>
+      </p>
+      
+      </footer>
+      <script>
+        if ("geolocation" in navigator) {
+          console.log('geolocation available');
+          navigator.geolocation.getCurrentPosition( position => {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+          document.getElementById('latitude').textContent = lat;
+          document.getElementById('longitude').textContent = lon;
+          //console.log(position);
+        });
+        } else {
+          console.log('geolocation not available')
+        };
+    window.lat = 37.7850;
+    window.lng = -122.4383;
+    function circlePoint(time) {
+  var radius = 0.01;
+  var x = Math.cos(time) * radius;
+  var y = Math.sin(time) * radius;
+  return {lat:window.lat + y, lng:window.lng + x};
+};
+
+var map;
+var mark;
+var initialize = function() {
+  map  = new google.maps.Map(document.getElementById('mapContainer'), {center:{lat:lat,lng:lng},zoom:12});
+  mark = new google.maps.Marker({position:{lat:lat, lng:lng}, map:map});
+};
+window.initialize = initialize;
+
+var redraw = function(payload) {
+  lat = payload.message.lat;
+  lng = payload.message.lng;
+  map.setCenter({lat:lat, lng:lng, alt:0});
+  mark.setPosition({lat:lat, lng:lng, alt:0});
+};
+setInterval(function() {
+  pubnub.publish({channel:pnChannel, message:circlePoint(new Date().getTime()/1000)});
+}, 500);
+
+
+
+
+
+
+
+
+
+        </script>
+        
+
+</body>
+</html>

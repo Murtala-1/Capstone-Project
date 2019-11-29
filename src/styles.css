@@ -1,0 +1,95 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+
+body {
+   background-color: lavender;
+}
+/* NAVBAR STYLING START HERE */
+header {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: auto;
+    background-color: rgb(69, 32, 230);
+  }
+
+  nav ul {
+    list-style-type: none;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  li a:hover {
+    background-color: #111;
+  }
+   .logo {
+    float: left;
+    margin-bottom: 1px auto;
+  }
+  /* NAVBAR STYLING STOP HERE */
+
+
+/* SEARCH BUTTON START */
+
+* {
+  box-sizing: border-box;
+}
+
+form.searchBox input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+form.searchBox button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+form.searchBox button:hover {
+  background: #000000;
+}
+
+form.searchBox::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+/* SEARCH BUTTON STOP */
+.headTitle{
+  color: black;
+  text-align: center;
+} 
+  /* FOOTER STYLING START HERE */
+.footerText{
+  background-color: #0b7dda;
+  text-align: center;
+  color: #f1f1f1;
+  margin-top: 100%;
+  padding: 1em;
+}
+
+   /* FOOTER STYLING STOP HERE */
